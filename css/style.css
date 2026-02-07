@@ -52,9 +52,11 @@ html, body {
   position: relative;
   width: 90vw;
   height: 85vh;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   border: 2px solid #95e208;
+  gap: 0;
 }
 
 .quadrant {
@@ -65,57 +67,409 @@ html, body {
   border: 1px solid #95e208;
 }
 
-.top-left, .top-right {
-  flex: 1;
-  border-bottom: 1px solid #95e208;
-}
-
 .top-left {
   border-right: 1px solid #95e208;
+  border-bottom: 1px solid #95e208;
 }
 
 .top-right {
   border-left: 1px solid #95e208;
-}
-
-.bottom-section {
-  flex: 1;
-  display: flex;
-  border-top: 1px solid #95e208;
+  border-bottom: 1px solid #95e208;
 }
 
 .bottom-left {
-  flex: 1;
+  border-right: 1px solid #95e208;
+  border-top: 1px solid #95e208;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-right: 1px solid #95e208;
 }
 
 .bottom-right {
+  border-left: 1px solid #95e208;
+  border-top: 1px solid #95e208;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Quadrant Labels */
+.quadrant-label {
+  position: absolute;
+  top: 2vh;
+  left: 2vw;
+  font-family: 'VT323', monospace;
+  font-size: 2.5vh;
+  color: #95e208;
+  text-shadow: 0 0 10px #95e208;
+  letter-spacing: 0.2em;
+  font-weight: bold;
+  z-index: 10;
+}
+
+/* Wave line for quadrants */
+.wave-line {
+  position: absolute;
+  bottom: 10%;
+  width: 85%;
+  height: 30px;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100"><path d="M0,50 Q50,20 100,50 T200,50 T300,50 T400,50 T500,50 T600,50 T700,50 T800,50 T900,50 T1000,50" stroke="%2395e208" stroke-width="4" fill="none" stroke-linecap="round"/></svg>');
+  background-repeat: repeat-x;
+  background-size: 200px 30px;
+  background-position: 0 center;
+  filter: drop-shadow(0 0 5px #95e208);
+  animation: wave-scroll 2s linear infinite;
+}
+
+@keyframes wave-scroll {
+  0% {
+    background-position: 0 center;
+  }
+  100% {
+    background-position: 200px center;
+  }
+}
+
+/* Diamond shape for top quadrants */
+/* 3D Wave Grid for Top Quadrants */
+.sea-top-left,
+.sea-top-right {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 70%;
+  transform-style: preserve-3d;
+  transform: rotateX(60deg) rotateZ(-15deg);
+  justify-content: center;
+  align-items: center;
+  gap: 0.5vw;
+  padding: 2vw;
+}
+
+.sea-top-left {
+  transform: rotateX(60deg) rotateZ(-25deg);
+}
+
+.sea-top-right {
+  transform: rotateX(60deg) rotateZ(25deg);
+}
+
+.sea-top-left-blue,
+.sea-top-right-magenta {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 70%;
+  transform-style: preserve-3d;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5vw;
+  padding: 2vw;
+}
+
+.sea-top-left-blue {
+  transform: rotateX(60deg) rotateZ(-25deg);
+}
+
+.sea-top-right-magenta {
+  transform: rotateX(60deg) rotateZ(25deg);
+}
+
+.sea-top-left .wave,
+.sea-top-right .wave,
+.sea-top-left-blue .wave,
+.sea-top-right-magenta .wave {
+  width: 2.5vw;
+  height: 2.5vw;
+  background: #95e208;
+  filter: blur(0.3px) drop-shadow(0 0 3px #95e208);
+  transform: translateZ(0px) rotateX(90deg);
+  transform-origin: top;
+  margin: -8px 3px;
+  animation: wave-pulse 0.8s ease-in-out infinite alternate;
+  opacity: 0.8;
+  border-radius: 2px;
+}
+
+.wave-blue {
+  background: #0099ff !important;
+  filter: blur(0.3px) drop-shadow(0 0 3px #0099ff) !important;
+}
+
+.wave-magenta {
+  background: #ff00ff !important;
+  filter: blur(0.3px) drop-shadow(0 0 3px #ff00ff) !important;
+}
+
+@keyframes wave-pulse {
+  from {
+    height: 2vw;
+    opacity: 0.6;
+  }
+  to {
+    height: 3.5vw;
+    opacity: 1;
+  }
+}
+
+.sea-top-left .wave:nth-child(1) { animation-delay: 0s; }
+.sea-top-left .wave:nth-child(2) { animation-delay: 0.03s; }
+.sea-top-left .wave:nth-child(3) { animation-delay: 0.06s; }
+.sea-top-left .wave:nth-child(4) { animation-delay: 0.09s; }
+.sea-top-left .wave:nth-child(5) { animation-delay: 0.12s; }
+.sea-top-left .wave:nth-child(6) { animation-delay: 0.15s; }
+.sea-top-left .wave:nth-child(7) { animation-delay: 0.18s; }
+.sea-top-left .wave:nth-child(8) { animation-delay: 0.21s; }
+.sea-top-left .wave:nth-child(9) { animation-delay: 0.24s; }
+.sea-top-left .wave:nth-child(10) { animation-delay: 0.27s; }
+.sea-top-left .wave:nth-child(11) { animation-delay: 0.30s; }
+.sea-top-left .wave:nth-child(12) { animation-delay: 0.33s; }
+.sea-top-left .wave:nth-child(13) { animation-delay: 0.36s; }
+.sea-top-left .wave:nth-child(14) { animation-delay: 0.39s; }
+.sea-top-left .wave:nth-child(15) { animation-delay: 0.42s; }
+.sea-top-left .wave:nth-child(16) { animation-delay: 0.45s; }
+.sea-top-left .wave:nth-child(17) { animation-delay: 0.48s; }
+.sea-top-left .wave:nth-child(18) { animation-delay: 0.51s; }
+.sea-top-left .wave:nth-child(19) { animation-delay: 0.54s; }
+.sea-top-left .wave:nth-child(20) { animation-delay: 0.57s; }
+.sea-top-left .wave:nth-child(21) { animation-delay: 0.60s; }
+.sea-top-left .wave:nth-child(22) { animation-delay: 0.63s; }
+.sea-top-left .wave:nth-child(23) { animation-delay: 0.66s; }
+.sea-top-left .wave:nth-child(24) { animation-delay: 0.69s; }
+.sea-top-left .wave:nth-child(25) { animation-delay: 0.72s; }
+
+.sea-top-right .wave:nth-child(1) { animation-delay: 0s; }
+.sea-top-right .wave:nth-child(2) { animation-delay: 0.03s; }
+.sea-top-right .wave:nth-child(3) { animation-delay: 0.06s; }
+.sea-top-right .wave:nth-child(4) { animation-delay: 0.09s; }
+.sea-top-right .wave:nth-child(5) { animation-delay: 0.12s; }
+.sea-top-right .wave:nth-child(6) { animation-delay: 0.15s; }
+.sea-top-right .wave:nth-child(7) { animation-delay: 0.18s; }
+.sea-top-right .wave:nth-child(8) { animation-delay: 0.21s; }
+.sea-top-right .wave:nth-child(9) { animation-delay: 0.24s; }
+.sea-top-right .wave:nth-child(10) { animation-delay: 0.27s; }
+.sea-top-right .wave:nth-child(11) { animation-delay: 0.30s; }
+.sea-top-right .wave:nth-child(12) { animation-delay: 0.33s; }
+.sea-top-right .wave:nth-child(13) { animation-delay: 0.36s; }
+.sea-top-right .wave:nth-child(14) { animation-delay: 0.39s; }
+.sea-top-right .wave:nth-child(15) { animation-delay: 0.42s; }
+.sea-top-right .wave:nth-child(16) { animation-delay: 0.45s; }
+.sea-top-right .wave:nth-child(17) { animation-delay: 0.48s; }
+.sea-top-right .wave:nth-child(18) { animation-delay: 0.51s; }
+.sea-top-right .wave:nth-child(19) { animation-delay: 0.54s; }
+.sea-top-right .wave:nth-child(20) { animation-delay: 0.57s; }
+.sea-top-right .wave:nth-child(21) { animation-delay: 0.60s; }
+.sea-top-right .wave:nth-child(22) { animation-delay: 0.63s; }
+.sea-top-right .wave:nth-child(23) { animation-delay: 0.66s; }
+.sea-top-right .wave:nth-child(24) { animation-delay: 0.69s; }
+.sea-top-right .wave:nth-child(25) { animation-delay: 0.72s; }
+
+.sea-top-left-blue .wave:nth-child(1) { animation-delay: 0s; }
+.sea-top-left-blue .wave:nth-child(2) { animation-delay: 0.03s; }
+.sea-top-left-blue .wave:nth-child(3) { animation-delay: 0.06s; }
+.sea-top-left-blue .wave:nth-child(4) { animation-delay: 0.09s; }
+.sea-top-left-blue .wave:nth-child(5) { animation-delay: 0.12s; }
+.sea-top-left-blue .wave:nth-child(6) { animation-delay: 0.15s; }
+.sea-top-left-blue .wave:nth-child(7) { animation-delay: 0.18s; }
+.sea-top-left-blue .wave:nth-child(8) { animation-delay: 0.21s; }
+.sea-top-left-blue .wave:nth-child(9) { animation-delay: 0.24s; }
+.sea-top-left-blue .wave:nth-child(10) { animation-delay: 0.27s; }
+.sea-top-left-blue .wave:nth-child(11) { animation-delay: 0.30s; }
+.sea-top-left-blue .wave:nth-child(12) { animation-delay: 0.33s; }
+.sea-top-left-blue .wave:nth-child(13) { animation-delay: 0.36s; }
+.sea-top-left-blue .wave:nth-child(14) { animation-delay: 0.39s; }
+.sea-top-left-blue .wave:nth-child(15) { animation-delay: 0.42s; }
+.sea-top-left-blue .wave:nth-child(16) { animation-delay: 0.45s; }
+.sea-top-left-blue .wave:nth-child(17) { animation-delay: 0.48s; }
+.sea-top-left-blue .wave:nth-child(18) { animation-delay: 0.51s; }
+.sea-top-left-blue .wave:nth-child(19) { animation-delay: 0.54s; }
+.sea-top-left-blue .wave:nth-child(20) { animation-delay: 0.57s; }
+.sea-top-left-blue .wave:nth-child(21) { animation-delay: 0.60s; }
+.sea-top-left-blue .wave:nth-child(22) { animation-delay: 0.63s; }
+.sea-top-left-blue .wave:nth-child(23) { animation-delay: 0.66s; }
+.sea-top-left-blue .wave:nth-child(24) { animation-delay: 0.69s; }
+.sea-top-left-blue .wave:nth-child(25) { animation-delay: 0.72s; }
+
+.sea-top-right-magenta .wave:nth-child(1) { animation-delay: 0s; }
+.sea-top-right-magenta .wave:nth-child(2) { animation-delay: 0.03s; }
+.sea-top-right-magenta .wave:nth-child(3) { animation-delay: 0.06s; }
+.sea-top-right-magenta .wave:nth-child(4) { animation-delay: 0.09s; }
+.sea-top-right-magenta .wave:nth-child(5) { animation-delay: 0.12s; }
+.sea-top-right-magenta .wave:nth-child(6) { animation-delay: 0.15s; }
+.sea-top-right-magenta .wave:nth-child(7) { animation-delay: 0.18s; }
+.sea-top-right-magenta .wave:nth-child(8) { animation-delay: 0.21s; }
+.sea-top-right-magenta .wave:nth-child(9) { animation-delay: 0.24s; }
+.sea-top-right-magenta .wave:nth-child(10) { animation-delay: 0.27s; }
+.sea-top-right-magenta .wave:nth-child(11) { animation-delay: 0.30s; }
+.sea-top-right-magenta .wave:nth-child(12) { animation-delay: 0.33s; }
+.sea-top-right-magenta .wave:nth-child(13) { animation-delay: 0.36s; }
+.sea-top-right-magenta .wave:nth-child(14) { animation-delay: 0.39s; }
+.sea-top-right-magenta .wave:nth-child(15) { animation-delay: 0.42s; }
+.sea-top-right-magenta .wave:nth-child(16) { animation-delay: 0.45s; }
+.sea-top-right-magenta .wave:nth-child(17) { animation-delay: 0.48s; }
+.sea-top-right-magenta .wave:nth-child(18) { animation-delay: 0.51s; }
+.sea-top-right-magenta .wave:nth-child(19) { animation-delay: 0.54s; }
+.sea-top-right-magenta .wave:nth-child(20) { animation-delay: 0.57s; }
+.sea-top-right-magenta .wave:nth-child(21) { animation-delay: 0.60s; }
+.sea-top-right-magenta .wave:nth-child(22) { animation-delay: 0.63s; }
+.sea-top-right-magenta .wave:nth-child(23) { animation-delay: 0.66s; }
+.sea-top-right-magenta .wave:nth-child(24) { animation-delay: 0.69s; }
+.sea-top-right-magenta .wave:nth-child(25) { animation-delay: 0.72s; }
+
+/* Concentric circles for bottom-left */
+.wrap {
+  width: 100%;
+  height: 70%;
+  margin: 0;
+  position: relative;
+  perspective: 4000px;
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2vw;
+  transform: rotateX(60deg) rotateZ(-25deg);
+}
+
+.circle {
+  filter: blur(1px);
+  transform-style: preserve-3d;
+  box-sizing: border-box;
+  opacity: 0;
+  width: 80vh;
+  height: 80vh;
+  border: 2.5vh solid #95e208;
+  border-radius: 50%;
+  position: absolute;
+  animation: spin 20s ease-in-out alternate infinite;
+}
+
+.circle:nth-of-type(1) {
+  animation-delay: 500ms;
+}
+.circle:nth-of-type(2) {
+  animation-delay: 1000ms;
+}
+.circle:nth-of-type(3) {
+  animation-delay: 1500ms;
+}
+.circle:nth-of-type(4) {
+  animation-delay: 2000ms;
+}
+.circle:nth-of-type(5) {
+  animation-delay: 2500ms;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotateY(0deg) rotateX(0deg);
+    opacity: 1;
+  }
+  25% {
+    transform: rotateY(180deg) rotateX(360deg);
+  }
+  50% {
+    transform: rotateY(540deg) rotateX(540deg);
+  }
+  75% {
+    transform: rotateY(720deg) rotateX(900deg);
+  }
+  100% {
+    transform: rotateY(900deg) rotateX(1080deg);
+    opacity: 1;
+  }
+}
+
+.radar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.radar1 {
+  border: 1vh solid #95e208;
+  animation: spin-radar 4s linear infinite;
+}
+
+.radar2 {
+  border: 1vh solid #95e208;
+  animation: spin-radar 6s linear infinite reverse;
+}
+
+.radar3 {
+  border: 1vh solid #95e208;
+  animation: spin-radar 8s linear infinite;
+}
+
+@keyframes spin-radar {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Signal Information Display */
+.signal-info {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3vw 4vw;
+  font-family: 'VT323', monospace;
+  font-size: 2vh;
+  color: #95e208;
+  text-shadow: 0 0 10px #95e208;
+  letter-spacing: 0.15em;
+  position: relative;
+}
+
+.signal-info > div:first-child {
   flex: 1;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  border-left: 1px solid #95e208;
+  flex-direction: column;
+  gap: 1.2vh;
 }
 
-/* Shape styling */
-.shape-container {
-  position: relative;
+.info-line {
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.info-line .value {
+  color: #95e208;
+  font-weight: bold;
+  text-shadow: 0 0 5px #95e208;
+  margin-left: 1em;
+}
+
+.info-spacer {
+  height: 0.5vh;
+}
+
+.key-codes {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 0.6vh;
   justify-content: center;
 }
 
-/* Shapes for quadrants */
-.shape-diamond {
-  width: 20vw;
-  height: 20vw;
-  background: radial-gradient(ellipse at 30% 30%, #95e208, #4a7c04);
-  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-  filter: blur(1px) drop-shadow(0 0 20px #95e208);
-  animation: float 3s ease-in-out infinite;
+.code-line {
+  font-size: 2vh;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.code-line .value {
+  color: #95e208;
+  margin-left: 0.5em;
+  font-weight: bold;
 }
 
 .waves-container {
@@ -140,6 +494,58 @@ html, body {
 .waves-container .wave:nth-child(3) { animation-delay: 0.2s; }
 .waves-container .wave:nth-child(4) { animation-delay: 0.3s; }
 .waves-container .wave:nth-child(5) { animation-delay: 0.4s; }
+
+/* Math calculations display */
+.math-calculations {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2vw;
+  overflow: hidden;
+  font-family: 'VT323', monospace;
+  font-size: 1.8vh;
+  color: #95e208;
+  text-shadow: 0 0 10px #95e208, 0 0 20px #95e208;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.math-line {
+  width: 95%;
+  height: auto;
+  text-align: center;
+  line-height: 1.8;
+  animation: math-flicker 0.15s infinite, math-glow 1.5s ease-in-out infinite;
+  letter-spacing: 0.1em;
+  word-break: break-all;
+}
+
+.math-line:nth-child(1) { animation-delay: 0s, 0s; }
+.math-line:nth-child(2) { animation-delay: 0.05s, 0.2s; }
+.math-line:nth-child(3) { animation-delay: 0.1s, 0.4s; }
+.math-line:nth-child(4) { animation-delay: 0.03s, 0.6s; }
+.math-line:nth-child(5) { animation-delay: 0.07s, 0.8s; }
+
+@keyframes math-flicker {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes math-glow {
+  0%, 100% {
+    text-shadow: 0 0 10px #95e208, 0 0 20px #95e208;
+  }
+  50% {
+    text-shadow: 0 0 20px #95e208, 0 0 40px #95e208, 0 0 60px #95e208;
+  }
+}
 
 @keyframes float {
   0%, 100% {
@@ -179,14 +585,17 @@ html, body {
   height: 100%;
   background: #95e208;
   z-index: 10;
+  transform: translateX(-50%);
 }
 
 .horizontal-line.full-width {
+  position: absolute;
   top: 50%;
   width: 100%;
   height: 1px;
   left: 0;
   z-index: 10;
+  transform: translateY(-50%);
 }
 
 .background-gif {
@@ -388,7 +797,7 @@ html, body {
 .receiving {
   text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff;
   color: #ff00ff;
-  animation: receiving-pulse 0.8s ease-in-out infinite;
+  animation: receiving-pulse 0.8s ease-in-out infinite, floating 3s ease-in-out infinite;
 }
 
 @keyframes sending-pulse {
@@ -410,6 +819,15 @@ html, body {
   50% {
     opacity: 1;
     text-shadow: 0 0 30px #ff00ff, 0 0 50px #ff00ff;
+  }
+}
+
+@keyframes floating {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0px);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-20px);
   }
 }
 
